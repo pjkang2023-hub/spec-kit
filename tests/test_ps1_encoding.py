@@ -19,6 +19,7 @@ _PS1_DIRS = [
     REPO_ROOT / "scripts" / "powershell",
     REPO_ROOT / "extensions" / "git" / "scripts" / "powershell",
     REPO_ROOT / "extensions" / "github" / "scripts" / "powershell",
+    REPO_ROOT / "extensions" / "quality" / "scripts" / "powershell",
 ]
 
 

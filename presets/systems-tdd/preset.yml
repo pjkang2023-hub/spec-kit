@@ -1,0 +1,69 @@
+schema_version: "1.0"
+
+preset:
+  id: "systems-tdd"
+  name: "Systems Contract-First & TDD"
+  version: "1.0.0"
+  description: "Contract-first interfaces, mandatory Red-Green-Refactor TDD, and memory/concurrency/error invariants for C, C++, Rust, and Go."
+  author: "pjkang2023-hub"
+  repository: "https://github.com/pjkang2023-hub/spec-kit"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=0.15.1"
+
+provides:
+  templates:
+    - type: "template"
+      name: "spec-template"
+      file: "templates/spec-template.md"
+      description: "Systems feature specification with memory, concurrency, error, and bounds invariants"
+      replaces: "spec-template"
+
+    - type: "template"
+      name: "plan-template"
+      file: "templates/plan-template.md"
+      description: "Systems implementation plan requiring public ABI/header/trait/interface contracts and sanitizer profiles"
+      replaces: "plan-template"
+
+    - type: "template"
+      name: "tasks-template"
+      file: "templates/tasks-template.md"
+      description: "Mandatory Contract -> Red (failing tests) -> Green/Harden task breakdown"
+      replaces: "tasks-template"
+
+    - type: "command"
+      name: "speckit.plan"
+      file: "commands/speckit.plan.md"
+      description: "Enforces public header/trait/interface contracts and C/C++/Rust/Go safety gates during planning"
+      replaces: "speckit.plan"
+      strategy: "wrap"
+
+    - type: "command"
+      name: "speckit.tasks"
+      file: "commands/speckit.tasks.md"
+      description: "Enforces mandatory test-first (Contract -> Red -> Green) task ordering mapped to REQ IDs"
+      replaces: "speckit.tasks"
+      strategy: "wrap"
+
+    - type: "command"
+      name: "speckit.implement"
+      file: "commands/speckit.implement.md"
+      description: "Enforces Red-before-Green verification, compiler/sanitizer discipline, and zero-stub completion"
+      replaces: "speckit.implement"
+      strategy: "wrap"
+
+    - type: "command"
+      name: "speckit.converge"
+      file: "commands/speckit.converge.md"
+      description: "Integrates deterministic verify reports and adversarial review findings into convergence assessment"
+      replaces: "speckit.converge"
+      strategy: "wrap"
+
+tags:
+  - "systems"
+  - "tdd"
+  - "c"
+  - "cpp"
+  - "rust"
+  - "go"

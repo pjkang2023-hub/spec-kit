@@ -32,6 +32,16 @@
       "url": "https://raw.githubusercontent.com/github/spec-kit/main/workflows/assess/workflow.yml",
       "tags": ["assessment", "discovery", "triage", "product"],
       "bundled": true
+    },
+    "systems-sdd": {
+      "id": "systems-sdd",
+      "name": "Systems High-Assurance SDD",
+      "description": "Hybrid human-gated Spec & Plan followed by an autonomous Contract/TDD implement -> compiler/sanitizer verify -> adversarial review -> converge loop for C, C++, Rust, and Go.",
+      "author": "pjkang2023-hub",
+      "version": "1.0.0",
+      "url": "https://raw.githubusercontent.com/pjkang2023-hub/spec-kit/main/workflows/systems-sdd/workflow.yml",
+      "tags": ["systems", "c", "cpp", "rust", "go", "tdd", "quality"],
+      "bundled": true
     }
   }
 }

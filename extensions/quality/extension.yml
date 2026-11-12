@@ -1,0 +1,45 @@
+schema_version: "1.0"
+
+extension:
+  id: quality
+  name: "Systems Quality Gates & Adversarial Review"
+  version: "1.0.0"
+  description: "Deterministic compiler, linter, sanitizer/race test, and zero-stub verification plus fresh-context adversarial code review for C, C++, Rust, and Go."
+  author: pjkang2023-hub
+  repository: https://github.com/pjkang2023-hub/spec-kit
+  license: MIT
+
+requires:
+  speckit_version: ">=0.15.1"
+
+provides:
+  commands:
+    - name: speckit.quality.verify
+      file: commands/speckit.quality.verify.md
+      description: "Run deterministic build, lint, test/sanitizer, and zero-stub gates and write .specify/quality/latest-verify.json"
+    - name: speckit.quality.review
+      file: commands/speckit.quality.review.md
+      description: "Perform a fresh-context adversarial spec-compliance, test-authenticity, and systems-safety audit"
+
+  config:
+    - name: "quality-config.yml"
+      template: "config-template.yml"
+      description: "Toolchain, sanitizer, and stub-gate settings for deterministic verification"
+      required: false
+
+hooks:
+  after_implement:
+    command: speckit.quality.verify
+    optional: false
+    description: "Run deterministic build, lint, test, and stub verification immediately after implementation"
+  before_converge:
+    command: speckit.quality.verify
+    optional: false
+    description: "Refresh .specify/quality/latest-verify.json before convergence assessment"
+
+tags:
+  - "quality"
+  - "systems"
+  - "tdd"
+  - "verification"
+  - "review"

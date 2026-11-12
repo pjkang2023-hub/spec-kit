@@ -48,6 +48,31 @@
         "templates",
         "compatibility"
       ]
+    },
+    "systems-tdd": {
+      "name": "Systems Contract-First & TDD",
+      "id": "systems-tdd",
+      "version": "1.0.0",
+      "description": "Contract-first interfaces, mandatory Red-Green-Refactor TDD, and memory/concurrency/error invariants for C, C++, Rust, and Go.",
+      "author": "pjkang2023-hub",
+      "repository": "https://github.com/pjkang2023-hub/spec-kit",
+      "license": "MIT",
+      "bundled": true,
+      "requires": {
+        "speckit_version": ">=0.15.1"
+      },
+      "provides": {
+        "commands": 4,
+        "templates": 3
+      },
+      "tags": [
+        "systems",
+        "tdd",
+        "c",
+        "cpp",
+        "rust",
+        "go"
+      ]
     }
   }
 }

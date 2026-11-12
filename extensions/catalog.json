@@ -76,6 +76,22 @@
         "issues",
         "integration"
       ]
+    },
+    "quality": {
+      "name": "Systems Quality Gates & Adversarial Review",
+      "id": "quality",
+      "version": "1.0.0",
+      "description": "Deterministic compiler, linter, sanitizer/race test, and zero-stub verification plus fresh-context adversarial code review for C, C++, Rust, and Go.",
+      "author": "pjkang2023-hub",
+      "repository": "https://github.com/pjkang2023-hub/spec-kit",
+      "bundled": true,
+      "tags": [
+        "quality",
+        "systems",
+        "tdd",
+        "verification",
+        "review"
+      ]
     }
   }
 }

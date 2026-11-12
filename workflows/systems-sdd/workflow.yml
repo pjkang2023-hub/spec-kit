@@ -1,0 +1,117 @@
+schema_version: "1.0"
+
+workflow:
+  id: "systems-sdd"
+  name: "Systems High-Assurance SDD"
+  version: "1.0.0"
+  author: "pjkang2023-hub"
+  description: "Hybrid human-gated Spec & Plan followed by an autonomous Contract/TDD implement -> compiler/sanitizer verify -> adversarial review -> converge loop for C, C++, Rust, and Go."
+
+requires:
+  speckit_version: ">=0.15.1"
+  integrations:
+    any:
+      - "agy"
+      - "claude"
+      - "codex"
+      - "copilot"
+      - "gemini"
+      - "opencode"
+
+inputs:
+  spec:
+    type: string
+    required: true
+    prompt: "Describe the systems feature, component, or library to build"
+  integration:
+    type: string
+    default: "auto"
+    prompt: "Integration to use (e.g. agy, claude, copilot, gemini; 'auto' uses the project's initialized integration)"
+  systems_review_spec_verdict:
+    type: string
+    default: ""
+  systems_review_plan_verdict:
+    type: string
+    default: ""
+
+steps:
+  - id: specify
+    command: speckit.specify
+    integration: "{{ inputs.integration }}"
+    input:
+      args: "{{ inputs.spec }}"
+
+  - id: review-spec
+    type: gate
+    verdict_input: systems_review_spec_verdict
+    message: "Review spec.md (acceptance criteria + memory/concurrency/error invariants) before planning."
+    options: [approve, reject]
+    on_reject: abort
+
+  - id: plan
+    command: speckit.plan
+    integration: "{{ inputs.integration }}"
+    input:
+      args: "{{ inputs.spec }}"
+
+  - id: analyze
+    command: speckit.analyze
+    integration: "{{ inputs.integration }}"
+    input:
+      args: "Verify cross-artifact consistency between spec.md, plan.md, and public contracts/"
+
+  - id: review-plan
+    type: gate
+    verdict_input: systems_review_plan_verdict
+    message: "Review plan.md and contracts/ (headers/traits/interfaces & sanitizer strategy) before autonomous implementation."
+    options: [approve, reject]
+    on_reject: abort
+
+  - id: tasks
+    command: speckit.tasks
+    integration: "{{ inputs.integration }}"
+    input:
+      args: "{{ inputs.spec }}"
+
+  - id: build-verify-converge
+    type: do-while
+    max_iterations: 4
+    condition: "{{ (not steps.verify.output.data.passed) or ('Converged' not in steps.converge.output.stdout) }}"
+    steps:
+      - id: implement
+        command: speckit.implement
+        integration: "{{ inputs.integration }}"
+        input:
+          args: "Execute pending tasks in tasks.md strictly following Contract -> Red (failing tests) -> Green/Harden order."
+
+      - id: verify
+        type: shell
+        strict: true
+        output_format: json
+        timeout: 600
+        run: "python3 .specify/extensions/quality/scripts/python/verify_quality.py --json --soft-exit || python .specify/extensions/quality/scripts/python/verify_quality.py --json --soft-exit"
+
+      - id: review
+        command: speckit.quality.review
+        integration: "{{ inputs.integration }}"
+        capture: true
+        timeout: 600
+        input:
+          args: "Audit current implementation and tests against spec.md, plan.md, and .specify/quality/latest-verify.json"
+
+      - id: converge
+        command: speckit.converge
+        integration: "{{ inputs.integration }}"
+        capture: true
+        timeout: 600
+        input:
+          args: "Incorporate .specify/quality/latest-verify.json and .specify/quality/latest-review.md; append remediation tasks if any check or requirement failed."
+
+  - id: enforce-convergence
+    type: if
+    condition: "{{ (not steps.verify.output.data.passed) or ('Converged' not in steps.converge.output.stdout) }}"
+    then:
+      - id: fail-unconverged
+        type: shell
+        strict: true
+        run: 'echo "Systems SDD workflow exhausted max_iterations without passing deterministic verification and convergence." >&2; exit 1'

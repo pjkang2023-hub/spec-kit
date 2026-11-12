@@ -1,0 +1,30 @@
+schema_version: "1.0"
+
+bundle:
+  id: "systems-sdd"
+  name: "Systems High-Assurance SDD"
+  version: "1.0.0"
+  role: "systems-engineer"
+  description: "End-to-end high-quality Spec-to-Code setup for C, C++, Rust, and Go: contract-first TDD preset, deterministic compiler/linter/sanitizer & adversarial review extension, and hybrid human-gated + autonomous convergence workflow."
+  author: "pjkang2023-hub"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=0.15.1"
+  tools: []
+  mcp: []
+
+provides:
+  presets:
+    - id: "systems-tdd"
+      version: "1.0.0"
+      priority: 10
+      strategy: "replace"
+  extensions:
+    - id: "quality"
+      version: "1.0.0"
+  workflows:
+    - id: "systems-sdd"
+      version: "1.0.0"
+
+tags: ["systems", "c", "cpp", "rust", "go", "tdd", "quality"]

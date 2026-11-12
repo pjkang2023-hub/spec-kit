@@ -1,0 +1,20 @@
+# Quality Gates Configuration (.specify/extensions/quality/quality-config.yml)
+# Auto-detects Cargo.toml (Rust), go.mod (Go), CMakeLists.txt / meson.build / Makefile (C/C++)
+# when `checks` is empty.
+
+sanitizers: true          # Inject ASan+UBSan flags on CMake Debug test builds when true
+go_race: true             # Pass -race to `go test` on supported platforms
+stub_scan: true           # Fail verification if TODO/FIXME/todo!()/unimplemented!() remain in production code
+timeout_seconds: 300      # Per-check execution timeout
+
+# Optional explicit command list (each entry is argv-split without a shell).
+# Leave empty to use built-in stack auto-detection.
+checks: []
+# Example custom override:
+# checks:
+#   - name: "cmake-asan-configure"
+#     cmd: "cmake -B build -DCMAKE_BUILD_TYPE=Debug"
+#   - name: "cmake-build"
+#     cmd: "cmake --build build"
+#   - name: "ctest"
+#     cmd: "ctest --test-dir build --output-on-failure"

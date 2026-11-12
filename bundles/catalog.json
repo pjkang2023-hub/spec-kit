@@ -46,6 +46,28 @@
       },
       "tags": ["assessment", "discovery", "triage", "product"],
       "verified": true
+    },
+    "systems-sdd": {
+      "id": "systems-sdd",
+      "name": "Systems High-Assurance SDD",
+      "version": "1.0.0",
+      "role": "systems-engineer",
+      "description": "End-to-end high-quality Spec-to-Code setup for C, C++, Rust, and Go: contract-first TDD preset, deterministic compiler/linter/sanitizer & adversarial review extension, and hybrid human-gated + autonomous convergence workflow.",
+      "author": "pjkang2023-hub",
+      "license": "MIT",
+      "download_url": "https://raw.githubusercontent.com/pjkang2023-hub/spec-kit/main/bundles/systems-sdd/bundle.yml",
+      "repository": "https://github.com/pjkang2023-hub/spec-kit",
+      "requires": {
+        "speckit_version": ">=0.15.1"
+      },
+      "provides": {
+        "extensions": 1,
+        "presets": 1,
+        "steps": 0,
+        "workflows": 1
+      },
+      "tags": ["systems", "c", "cpp", "rust", "go", "tdd", "quality"],
+      "verified": true
     }
   }
 }
