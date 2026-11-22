@@ -1,0 +1,45 @@
+schema_version: "1.0"
+
+extension:
+  id: mbd-trace
+  name: "Two-Way Traceability (Spec <-> Model <-> Code <-> Test)"
+  version: "0.1.0"
+  description: "Deterministic requirement traceability: every REQ-### forward to plan, model element, @trace-tagged code, tests and results, and every code or test reference back to a defined requirement. Optional model checks against pemb-imported Simulink models and the pemb MBD trace graph."
+  author: pjkang2023-hub
+  repository: https://github.com/pjkang2023-hub/spec-kit
+  license: MIT
+
+requires:
+  speckit_version: ">=0.15.1"
+
+provides:
+  commands:
+    - name: speckit.mbd-trace.verify
+      file: commands/speckit.mbd-trace.verify.md
+      description: "Build the two-way trace and write .specify/trace/latest-trace.json and trace-matrix.md"
+    - name: speckit.mbd-trace.query
+      file: commands/speckit.mbd-trace.query.md
+      description: "Trace one requirement forward, or one file:line back to its requirements"
+
+  config:
+    - name: "trace-config.json"
+      template: "config-template.json"
+      description: "Source and test locations, required layers, model files and the optional pemb trace"
+      required: false
+
+hooks:
+  after_implement:
+    command: speckit.mbd-trace.verify
+    optional: false
+    description: "Check that every requirement is implemented and tested, and that no code points at an unknown requirement"
+  before_converge:
+    command: speckit.mbd-trace.verify
+    optional: false
+    description: "Refresh .specify/trace/latest-trace.json before convergence assessment"
+
+tags:
+  - "traceability"
+  - "mbd"
+  - "requirements"
+  - "verification"
+  - "systems"

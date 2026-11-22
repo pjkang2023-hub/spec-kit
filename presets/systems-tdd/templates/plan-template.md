@@ -47,10 +47,12 @@ Document and materialize exact public signatures under `specs/[###-feature]/cont
 
 ## Requirement-to-Verification Traceability Matrix
 
-| Requirement ID | Contract Symbol / Module | Planned Test Type (Unit / Boundary / Race / Integration) | Target Test File |
-| :--- | :--- | :--- | :--- |
-| `REQ-001` | `[module::fn]` | Unit + Boundary | `[tests/...]` |
-| `REQ-002` | `[module::err]` | Negative / Fault-Injection | `[tests/...]` |
+| Requirement ID | Model Element | Contract Symbol / Module | Planned Test Type (Unit / Boundary / Race / Integration) | Target Test File |
+| :--- | :--- | :--- | :--- | :--- |
+| `REQ-001` | `[library/folder/block or -]` | `[module::fn]` | Unit + Boundary | `[tests/...]` |
+| `REQ-002` | `[library/folder/block or -]` | `[module::err]` | Negative / Fault-Injection | `[tests/...]` |
+
+*Model Element*: in model-based projects, the model block (path in the imported model) that realizes the requirement and from which the code is generated or checked; `-` when there is no model. The `mbd-trace` extension checks every row against `spec.md`, the models, the `@trace` tags in code and the tests, in both directions.
 
 ## Project Structure
 
