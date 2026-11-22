@@ -61,12 +61,12 @@
         "speckit_version": ">=0.15.1"
       },
       "provides": {
-        "extensions": 1,
+        "extensions": 2,
         "presets": 1,
         "steps": 0,
         "workflows": 1
       },
-      "tags": ["systems", "c", "cpp", "rust", "go", "tdd", "quality"],
+      "tags": ["systems", "c", "cpp", "rust", "go", "tdd", "quality", "traceability"],
       "verified": true
     }
   }

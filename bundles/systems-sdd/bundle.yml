@@ -23,8 +23,10 @@ provides:
   extensions:
     - id: "quality"
       version: "1.0.0"
+    - id: "mbd-trace"
+      version: "0.1.0"
   workflows:
     - id: "systems-sdd"
       version: "1.0.0"
 
-tags: ["systems", "c", "cpp", "rust", "go", "tdd", "quality"]
+tags: ["systems", "c", "cpp", "rust", "go", "tdd", "quality", "traceability"]

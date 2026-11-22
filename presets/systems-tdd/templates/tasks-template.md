@@ -56,7 +56,7 @@ description: "Mandatory Contract-First & Red-Green-Refactor TDD task list templa
 
 ### Step 3C — Green & Harden Phase: Production Implementation
 
-- [ ] T009 [US1] Implement core logic in `[src/path]` to satisfy `REQ-001` and `REQ-002`, removing all placeholder stubs
+- [ ] T009 [US1] Implement core logic in `[src/path]` to satisfy `REQ-001` and `REQ-002`, tagging each implementing function `@trace REQ-001` / `@trace REQ-002`, removing all placeholder stubs
 - [ ] T010 [US1] Run full compiler warnings, linter, unit/integration tests, and race/sanitizer checks; refactor for clarity and bounds safety while keeping tests green
 
 **Checkpoint**: User Story 1 compiles with zero warnings, zero stubs, and 100% passing tests.
@@ -85,5 +85,5 @@ description: "Mandatory Contract-First & Red-Green-Refactor TDD task list templa
 
 ## Final Phase: Systems Hardening & Verification Gate
 
-- [ ] T014 Verify 100% `REQ-###` traceability from `spec.md` to passing tests
+- [ ] T014 Run `speckit.mbd-trace.verify` until `TRACE_VERIFY: PASSED`: every `REQ-###` planned, implemented (`@trace`), tested and passing, no dangling references
 - [ ] T015 Execute full deterministic quality gate (format, strict warnings/lints, race/ASan+UBSan tests, zero-stub scan)

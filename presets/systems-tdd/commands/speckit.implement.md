@@ -19,5 +19,8 @@ While executing `tasks.md` in the core workflow below, you **MUST** obey these e
    - Rust: Propagate errors via `Result<T, E>`; avoid `.unwrap()`/`.expect()` on untrusted or fallible inputs; respect `#![forbid(unsafe_code)]` unless explicitly authorized in `plan.md` with `// SAFETY:` comments.
    - Go: Check and wrap every `error`, honor `ctx.Done()`, close channels/resources deterministically, and pass `go test -race`.
    - Remove all `todo!()`, `unimplemented!()`, `/* TODO */`, `// TODO`, and `// FIXME` markers from completed production modules before marking Green tasks `[X]`.
+4. **Two-Way Traceability**:
+   - Tag every function that implements a requirement with a comment `@trace REQ-###` (several: `@trace REQ-001, REQ-004`; another feature's: `@trace <feature>/REQ-002`). Name the requirement in each test that verifies it.
+   - Never tag code with a requirement it does not implement, and never invent `REQ-###` IDs absent from `spec.md`: `speckit.mbd-trace.verify` fails on dangling references.
 
 {CORE_TEMPLATE}

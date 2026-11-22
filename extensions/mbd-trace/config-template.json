@@ -1,0 +1,16 @@
+{
+  "_comment": "Copied to .specify/extensions/mbd-trace/trace-config.json. Keys starting with _ are ignored.",
+  "source_globs": ["src/**/*", "include/**/*", "lib/**/*"],
+  "source_extensions": [".c", ".h", ".cc", ".cpp", ".hpp", ".rs", ".go", ".py", ".m"],
+  "test_globs": ["tests/**/*", "test/**/*"],
+  "junit_globs": [],
+  "model_json": [],
+  "require": ["plan", "code", "tests"],
+  "untraced_code": "warn",
+  "pemb_python": "",
+  "pemb_src": "",
+  "pemb_trace_config": "",
+  "_require_options": "plan, model, code, tests, results (needs junit_globs), tasks_done",
+  "_model_json": "pemb-imported models (pemb/imported/*.json); a plan Model Element must name a block path in one of them",
+  "_pemb": "set pemb_src (path to pemb/src), pemb_trace_config (its trace.toml) and pemb_python (pemb's venv python) to add the full MBD trace check; it runs as a subprocess in pemb's own environment"
+}

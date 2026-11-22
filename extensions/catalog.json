@@ -92,6 +92,22 @@
         "verification",
         "review"
       ]
+    },
+    "mbd-trace": {
+      "name": "Two-Way Traceability (Spec <-> Model <-> Code <-> Test)",
+      "id": "mbd-trace",
+      "version": "0.1.0",
+      "description": "Deterministic requirement traceability: every REQ-### forward to plan, model element, @trace-tagged code, tests and results, and every code or test reference back to a defined requirement; optional pemb MBD trace.",
+      "author": "pjkang2023-hub",
+      "repository": "https://github.com/pjkang2023-hub/spec-kit",
+      "bundled": true,
+      "tags": [
+        "traceability",
+        "mbd",
+        "requirements",
+        "verification",
+        "systems"
+      ]
     }
   }
 }
